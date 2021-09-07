@@ -8,6 +8,7 @@ public class Lavaplatos extends Thread{
 	public Lavaplatos(Fregadero pF, Mesa pM) {
 		f = pF;
 		m = pM;
+		
 	}
 
 	public void run(){

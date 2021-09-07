@@ -23,6 +23,24 @@ public class Mesa {
 		}
 	}
 	
+	public synchronized int cogerCubiertoT1() {
+		if(numCubiertosT1 == 0) {
+			return 0;
+		}else {
+			numCubiertosT1--;
+			return 1;
+		}
+	}
+	
+	public synchronized int cogerCubiertoT2() {
+		if(numCubiertosT2 == 0) {
+			return 0;
+		}else {
+			numCubiertosT2--;
+			return 1;
+		}
+	}
+	
 	public static void main(String [] args) {
 		Properties concurrencia = new Properties();
 		InputStream configInput = null;	   
