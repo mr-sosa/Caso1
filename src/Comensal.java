@@ -7,10 +7,13 @@ public class Comensal extends Thread {
 	
 	private Fregadero f;
 	
-	public Comensal(int pID, int pPlatos, Fregadero pF) {
+	private Mesa m;
+	
+	public Comensal(int pID, int pPlatos, Fregadero pF, Mesa pM) {
 		id = pID;
 		numPlatos = pPlatos;
 		f = pF;
+		m = pM;
 	}
 
 	public void run(){

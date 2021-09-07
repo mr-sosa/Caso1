@@ -6,11 +6,13 @@ import javax.swing.JOptionPane;
 
 public class Mesa {
 	
-	private static int totalCubiertosT1;
+	private static int numCubiertosT1;
 	
-	private static int totalCubiertosT2;
+	private static int numCubiertosT2;
 	
-	public Mesa() {
+	public Mesa(int totalCubiertosT1, int totalCubiertosT2) {
+		numCubiertosT1 = totalCubiertosT1;
+		numCubiertosT2 = totalCubiertosT2;
 	}
 	
 	public static void main(String [] args) {
@@ -20,6 +22,8 @@ public class Mesa {
 		int numComensales = 0;
 		int numPlatos = 0;
 		int tamFregadero = 0;
+		int totalCubiertosT1 = 0;
+		int totalCubiertosT2 = 0;
 		
 		try{
 			configInput = new FileInputStream("data/concurrencia.properties");
@@ -47,10 +51,12 @@ public class Mesa {
 		
 		Fregadero f = new Fregadero(tamFregadero);
 		
-		new Lavaplatos().start();
+		Mesa m = new Mesa(totalCubiertosT1, totalCubiertosT2);
+		
+		new Lavaplatos(f, m).start();
 		
 		for(int i=0; i<numComensales; i++) {
-			new Comensal(i, numPlatos, f).start();
+			new Comensal(i, numPlatos, f, m).start();
 		}
 	}
 }
