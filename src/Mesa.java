@@ -1,17 +1,24 @@
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
 public class Mesa {
 	
+	//Total cubiertos T1
 	private int totalCT1;
 	
+	//Total cubiertos T2
 	private int totalCT2;
-	
+
+	//Numero cubiertos T1 disponibles
 	private int numCubiertosT1;
 	
+	//Numero cubiertos T2 disponibles
 	private int numCubiertosT2;
 	
 	public Mesa(int totalCubiertosT1, int totalCubiertosT2) {
@@ -25,31 +32,52 @@ public class Mesa {
 		int tipo = (int)(Math.random()*(2-1+1)+1);
 		if(tipo == 1 && numCubiertosT1 < totalCT1) {
 			numCubiertosT1 ++;
+			notify();
 		} else if(tipo == 2 && numCubiertosT2 < totalCT2) {
 			numCubiertosT2 ++;
+			notify();
 		} else if(tipo == 1 && numCubiertosT1 == totalCT1 && numCubiertosT2 < totalCT2) {
 			numCubiertosT2 ++;
+			notify();
 		} else if(tipo == 2 && numCubiertosT2 == totalCT2 && numCubiertosT1 < totalCT1) {
 			numCubiertosT1 ++;
+			notify();
 		}
 	}
 	
+	//resp=0->Esperando cubierto ; resp=1->Cubierto recogido
 	public synchronized int cogerCubiertoT1() {
-		if(numCubiertosT1 == 0) {
-			return 0;
-		}else {
-			numCubiertosT1--;
-			return 1;
+		int resp = 999;
+		try {
+			if(numCubiertosT1 == 0) {
+				wait();
+				resp = 0;
+			}else {
+				numCubiertosT1--;
+				resp = 1;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		return resp;
+		
 	}
 	
+	//resp=0->Esperando cubierto ; resp=1->Cubierto recogido
 	public synchronized int cogerCubiertoT2() {
-		if(numCubiertosT2 == 0) {
-			return 0;
-		}else {
-			numCubiertosT2--;
-			return 1;
+		int resp = 999;
+		try {
+			if(numCubiertosT2 == 0) {
+				wait();
+				resp = 0;
+			}else {
+				numCubiertosT2--;
+				resp = 1;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		return resp;
 	}
 	
 	public static void main(String [] args) {

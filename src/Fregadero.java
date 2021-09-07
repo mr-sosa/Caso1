@@ -11,16 +11,20 @@ public class Fregadero {
 	}
 	
 	public synchronized void agregarCubierto() {
-		while(n == tamFregadero) {
-			Thread.yield();
+		try {
+			if(n==tamFregadero) {
+				wait();
+			}
+			else {
+				n++;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		n++;
 	}
 	
 	public synchronized void quitarCubierto() {
-		while(n == 0) {
-			Thread.yield();
-		}
+		
 		n--;
 	}
 }
