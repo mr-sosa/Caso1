@@ -6,6 +6,10 @@ import javax.swing.JOptionPane;
 
 public class Mesa {
 	
+	private int totalCT1;
+	
+	private int totalCT2;
+	
 	private int numCubiertosT1;
 	
 	private int numCubiertosT2;
@@ -13,13 +17,20 @@ public class Mesa {
 	public Mesa(int totalCubiertosT1, int totalCubiertosT2) {
 		numCubiertosT1 = totalCubiertosT1;
 		numCubiertosT2 = totalCubiertosT2;
+		totalCT1 = totalCubiertosT1;
+		totalCT2 = totalCubiertosT2;
 	}
 	
-	public synchronized void agregarCubierto(int tipo) {
-		if(tipo == 1) {
+	public synchronized void agregarCubierto() {
+		int tipo = (int)(Math.random()*(2-1+1)+1);
+		if(tipo == 1 && numCubiertosT1 < totalCT1) {
 			numCubiertosT1 ++;
-		} else if(tipo == 2) {
+		} else if(tipo == 2 && numCubiertosT2 < totalCT2) {
 			numCubiertosT2 ++;
+		} else if(tipo == 1 && numCubiertosT1 == totalCT1 && numCubiertosT2 < totalCT2) {
+			numCubiertosT2 ++;
+		} else if(tipo == 2 && numCubiertosT2 == totalCT2 && numCubiertosT1 < totalCT1) {
+			numCubiertosT1 ++;
 		}
 	}
 	
