@@ -23,15 +23,19 @@ public class Mesa {
 		int tipo = (int)(Math.random()*(2-1+1)+1);
 		if(tipo == 1 && numCubiertosT1 < totalCT1) {
 			numCubiertosT1 ++;
+			System.out.println("Se agrego cubierto T1, stock actual T1: " + numCubiertosT1);
 			notify();
 		} else if(tipo == 2 && numCubiertosT2 < totalCT2) {
 			numCubiertosT2 ++;
+			System.out.println("Se agrego cubierto T2, stock actual T2: " + numCubiertosT2);
 			notify();
 		} else if(tipo == 1 && numCubiertosT1 == totalCT1 && numCubiertosT2 < totalCT2) {
 			numCubiertosT2 ++;
+			System.out.println("Se agrego cubierto T2, stock actual T2: " + numCubiertosT2);
 			notify();
 		} else if(tipo == 2 && numCubiertosT2 == totalCT2 && numCubiertosT1 < totalCT1) {
 			numCubiertosT1 ++;
+			System.out.println("Se agrego cubierto T1, stock actual T1: " + numCubiertosT1);
 			notify();
 		}
 	}
@@ -50,6 +54,7 @@ public class Mesa {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Numero de cubiertos T1 en mesa: " + numCubiertosT1);
 		return resp;
 
 	}
@@ -68,6 +73,7 @@ public class Mesa {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Numero de cubiertos T2 en mesa: " + numCubiertosT2);
 		return resp;
 	}
 }
