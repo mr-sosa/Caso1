@@ -11,16 +11,23 @@ public class Lavaplatos extends Thread{
 		
 	}
 
+	private void doAction(String action) throws InterruptedException {
+        System.out.println(Thread.currentThread().getName() + " " + action);
+    }
+	
 	public void run(){
 		while(true) {
-			f.quitarCubierto();
 			try {
+				f.quitarCubierto();
+				doAction(System.nanoTime() + ": Sacar del fregadero");
 				int numero = (int)(Math.random()*(2000-1000+1)+1000);
-				Thread.sleep(numero);
+				Thread.yield();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//m.agregarCubierto();
+			m.agregarCubierto();
+			notify();
 		}
+		
 	}
 }

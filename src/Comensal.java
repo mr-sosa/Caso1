@@ -40,11 +40,11 @@ public class Comensal extends Thread{
 					f.agregarCubierto();
 					doAction(System.nanoTime() + ": Dejar cubierto T2");
 				}
-				else if(resultadoT1==1 && resultadoT2==0) {
+				if(resultadoT1==1 && resultadoT2==0) {
 					m.agregarCubierto();
 					doAction(System.nanoTime() + ": Devolver cubierto T1");
 				}
-				else if(resultadoT1==1 && resultadoT2==0) {
+				if(resultadoT1==0 && resultadoT2==1) {
 					m.agregarCubierto();
 					doAction(System.nanoTime() + ": Devolver cubierto T2");
 				}
