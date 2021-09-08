@@ -19,20 +19,33 @@ public class Mesa {
 		totalCT2 = totalCubiertosT2;
 	}
 
-	public synchronized void agregarCubierto() {
-		int tipo = (int)(Math.random()*(2-1+1)+1);
-		if(tipo == 1 && numCubiertosT1 < totalCT1) {
+	public synchronized void agregarCubierto(int t) {
+		System.out.println("zzzz");
+		if(t == 1) {
 			numCubiertosT1 ++;
-			notify();
-		} else if(tipo == 2 && numCubiertosT2 < totalCT2) {
+			System.out.println("Se agrego cubierto T1, stock actual T1: " + numCubiertosT1);
+		} else if(t == 2) {
 			numCubiertosT2 ++;
-			notify();
-		} else if(tipo == 1 && numCubiertosT1 == totalCT1 && numCubiertosT2 < totalCT2) {
-			numCubiertosT2 ++;
-			notify();
-		} else if(tipo == 2 && numCubiertosT2 == totalCT2 && numCubiertosT1 < totalCT1) {
-			numCubiertosT1 ++;
-			notify();
+			System.out.println("Se agrego cubierto T2, stock actual T2: " + numCubiertosT2);
+		} else if(t == 3) {
+			int tipo = (int)(Math.random()*(2-1+1)+1);
+			if(tipo == 1 && numCubiertosT1 < totalCT1) {
+				numCubiertosT1 ++;
+				System.out.println("Se agrego cubierto T1, stock actual T1: " + numCubiertosT1);
+				notify();
+			} else if(tipo == 2 && numCubiertosT2 < totalCT2) {
+				numCubiertosT2 ++;
+				System.out.println("Se agrego cubierto T2, stock actual T2: " + numCubiertosT2);
+				notify();
+			} else if(tipo == 1 && numCubiertosT1 == totalCT1 && numCubiertosT2 < totalCT2) {
+				numCubiertosT2 ++;
+				System.out.println("Se agrego cubierto T2, stock actual T2: " + numCubiertosT2);
+				notify();
+			} else if(tipo == 2 && numCubiertosT2 == totalCT2 && numCubiertosT1 < totalCT1) {
+				numCubiertosT1 ++;
+				System.out.println("Se agrego cubierto T1, stock actual T1: " + numCubiertosT1);
+				notify();
+			}System.out.println("dejarcubierto");
 		}
 	}
 
@@ -41,15 +54,15 @@ public class Mesa {
 		int resp = 999;
 		try {
 			if(numCubiertosT1 == 0) {
-				wait();
 				resp = 0;
 			}else if(numCubiertosT1>0 && numCubiertosT1<=totalCT1){
 				numCubiertosT1--;
 				resp = 1;
 			}
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("Numero de cubiertos T1 en mesa: " + numCubiertosT1);
 		return resp;
 
 	}
@@ -59,15 +72,16 @@ public class Mesa {
 		int resp = 999;
 		try {
 			if(numCubiertosT2 == 0) {
-				wait();
+				
 				resp = 0;
 			}else if(numCubiertosT2>0 && numCubiertosT2<=totalCT2) {
 				numCubiertosT2--;
 				resp = 1;
 			}
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("Numero de cubiertos T2 en mesa: " + numCubiertosT2);
 		return resp;
 	}
 }

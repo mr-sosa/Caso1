@@ -26,7 +26,8 @@ public class Comensal extends Thread{
 	
 	public void run() {
 		try {
-			while (true) {
+			int n = 0;
+			while (n < numPlatos) {
 				int resultadoT1 = m.cogerCubiertoT1();
 				doAction(System.nanoTime() + ": Coger cubierto T1");
 				int resultadoT2 = m.cogerCubiertoT2();
@@ -41,11 +42,11 @@ public class Comensal extends Thread{
 					doAction(System.nanoTime() + ": Dejar cubierto T2");
 				}
 				else if(resultadoT1==1 && resultadoT2==0) {
-					m.agregarCubierto();
+					m.agregarCubierto(1);
 					doAction(System.nanoTime() + ": Devolver cubierto T1");
 				}
 				else if(resultadoT1==1 && resultadoT2==0) {
-					m.agregarCubierto();
+					m.agregarCubierto(2);
 					doAction(System.nanoTime() + ": Devolver cubierto T2");
 				}
 			}
