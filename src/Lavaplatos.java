@@ -20,7 +20,7 @@ public class Lavaplatos extends Thread{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			m.agregarCubierto();
+			//m.agregarCubierto();
 		}
 	}
 }

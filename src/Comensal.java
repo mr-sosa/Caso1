@@ -1,38 +1,30 @@
 
-public class Comensal extends Thread {
-
-//	private Object t1;
-//	
-//	private Object t2;
+public class Comensal extends Thread{
+	private int id;
 	
 	private int numPlatos;
-	
-	private int id;
 	
 	private Fregadero f;
 	
 	private Mesa m;
 	
+	private Object t1;
+	
+	private Object t2;
+	
 	public Comensal(int pID,  int pPlatos, Fregadero pF, Mesa pM) {
-		id = pID;
-//		this.t1 = t1;
-//		this.t2 = t2;
-		numPlatos = pPlatos;
-		f = pF;
-		m = pM;
+		this.id = pID;
+		this.numPlatos = pPlatos;
+		this.f = pF;
+		this.m = pM;
 	}
 	
 	private void doAction(String action) throws InterruptedException {
         System.out.println(Thread.currentThread().getName() + " " + action);
-        int numero = (int)(Math.random()*(3000-1000+1)+1000);
-        Thread.sleep(numero);
+        Thread.sleep(((int) (Math.random() * 100)));
     }
 	
-	private synchronized void comer() {
-		numPlatos--;
-    }
-	
-	public void run(){
+	public void run() {
 		try {
 			while (true) {
 				int resultadoT1 = m.cogerCubiertoT1();
@@ -41,7 +33,7 @@ public class Comensal extends Thread {
 				doAction(System.nanoTime() + ": Coger cubierto T2");
 				
 				if(resultadoT1==1 && resultadoT2==1) {
-					comer();
+					//comer();
 					doAction(System.nanoTime() + ": Comer");
 					f.agregarCubierto();
 					doAction(System.nanoTime() + ": Dejar cubierto T1");
@@ -53,7 +45,6 @@ public class Comensal extends Thread {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 }
