@@ -29,7 +29,6 @@ public class Fregadero {
 			}
 			else {
 				n--;
-				notify();
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
