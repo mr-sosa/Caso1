@@ -11,27 +11,30 @@ public class Fregadero {
 	
 	public synchronized void agregarCubierto() {
 		try {
-			if(n==tamFregadero) {
+			while(n==tamFregadero) {
 				wait();
 			}
-			else {
-				n++;
-			}
+			n++;
+			System.out.println("Se agregó un cubierto al Fregadero, stock actual: " + n);
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public synchronized void quitarCubierto() {
+	public synchronized int quitarCubierto() {
+		int resp = 0;
 		try {
-			if(n==0) {
-				wait();
-			}
-			else {
+			if(n!=0) {
 				n--;
+				resp = 1;
+				System.out.println("Se quitó un cubierto al Fregadero, stock actual: " + n);
 			}
-		} catch (InterruptedException e) {
+			
+			
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		return resp;
 	}
 }
