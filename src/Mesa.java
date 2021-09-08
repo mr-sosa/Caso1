@@ -20,7 +20,7 @@ public class Mesa {
 	}
 
 	public synchronized void agregarCubierto(int t) {
-		System.out.println("zzzz");
+		
 		if(t == 1) {
 			numCubiertosT1 ++;
 			System.out.println("Se agrego cubierto T1, stock actual T1: " + numCubiertosT1);
@@ -28,6 +28,7 @@ public class Mesa {
 			numCubiertosT2 ++;
 			System.out.println("Se agrego cubierto T2, stock actual T2: " + numCubiertosT2);
 		} else if(t == 3) {
+			System.out.println("Cubierto lavado");
 			int tipo = (int)(Math.random()*(2-1+1)+1);
 			if(tipo == 1 && numCubiertosT1 < totalCT1) {
 				numCubiertosT1 ++;
@@ -62,7 +63,6 @@ public class Mesa {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Numero de cubiertos T1 en mesa: " + numCubiertosT1);
 		return resp;
 
 	}
@@ -81,7 +81,6 @@ public class Mesa {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Numero de cubiertos T2 en mesa: " + numCubiertosT2);
 		return resp;
 	}
 }

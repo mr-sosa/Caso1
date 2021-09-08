@@ -19,10 +19,17 @@ public class Lavaplatos extends Thread{
 				int x = f.quitarCubierto();
 				if (x == 1) {
 					int numero = (int)(Math.random()*(2000-1000+1)+1000);
+					System.out.println("Lavando T1");
 					sleep(numero);
-					System.out.println("2");
-					m.agregarCubierto(3);
-					System.out.println("3");
+					System.out.println("Se terminó de lavar T1");
+					m.agregarCubierto(1);
+					
+				}else if (x == 2) {
+					int numero = (int)(Math.random()*(2000-1000+1)+1000);
+					System.out.println("Lavando T1");
+					sleep(numero);
+					System.out.println("Se terminó de lavar T2");
+					m.agregarCubierto(2);					
 				}
 				
 			} catch (Exception e) {
