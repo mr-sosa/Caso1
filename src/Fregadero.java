@@ -23,7 +23,15 @@ public class Fregadero {
 	}
 	
 	public synchronized void quitarCubierto() {
-		
-		n--;
+		try {
+			if(n==0) {
+				wait();
+			}
+			else {
+				n--;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
